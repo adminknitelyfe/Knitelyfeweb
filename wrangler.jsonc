@@ -1,0 +1,35 @@
+{
+  // Knite Lyfe website — deployed to Cloudflare Workers as static assets.
+  //
+  // There is deliberately no Worker script here. The site is nine static HTML
+  // pages with no server-side logic, so Workers Static Assets serves ./site
+  // directly from Cloudflare's edge. Adding a `main` entry point would only be
+  // needed if the site later requires server-side behaviour (form handling,
+  // redirects with logic, an API route).
+  //
+  // Deploy:  npx wrangler deploy
+  // Preview: npx wrangler versions upload
+
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "knitelyfeweb",
+  "compatibility_date": "2026-08-27",
+
+  "assets": {
+    "directory": "./site",
+
+    // "auto-trailing-slash" lets /safety resolve to /safety.html, so the clean
+    // URL and the .html URL both work. Every internal link on the site uses the
+    // .html form, so this only adds tolerance rather than changing behaviour.
+    "html_handling": "auto-trailing-slash",
+
+    // The site has no 404 page yet. "none" returns Cloudflare's default 404
+    // rather than silently serving index.html for a mistyped path, which would
+    // make broken links invisible. Switch to "404-page" once site/404.html
+    // exists.
+    "not_found_handling": "none"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}
