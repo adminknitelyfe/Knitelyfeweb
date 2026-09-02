@@ -40,3 +40,11 @@ Thumbs.db
 # Machine-local tool settings (launch.json IS tracked; local overrides are not)
 # ---------------------------------------------------------------------------
 **/.claude/settings.local.json
+
+# ---------------------------------------------------------------------------
+# Firebase config. Required at build time by the com.google.gms.google-services
+# gradle plugin, but not committed — so that swapping the current placeholder
+# for a real project does not push live keys by accident.
+# Copy google-services.json.example to google-services.json to build.
+# ---------------------------------------------------------------------------
+google-services.json
