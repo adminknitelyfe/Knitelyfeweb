@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knite Exchange — Share Your Knite, Not Your Number</title>
+<meta name="description" content="Knite Exchange is being designed to let people share verified identity signals through a secure link, QR code or phone tap — without handing strangers a phone number, address, date of birth or identity documents.">
+<meta property="og:title" content="Knite Exchange — Share Your Knite, Not Your Number">
+<meta property="og:description" content="Verify more. Reveal less. Establish identity confidence before meeting someone, then decide what to share.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knitelyfe.com/knite-exchange.html">
+<meta name="theme-color" content="#0A1628">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230A1628'/><path d='M16 6l7 3v7c0 5-3 9.4-7 10.6C12 25.4 9 21 9 16V9l7-3z' fill='%23F97316'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* knite-exchange — page-specific */
+.shot{padding:0;overflow:hidden}
+.shot .scene{width:100%;height:100%;display:block;object-fit:cover}
+.shot.has-scene span{display:none}
+
+/* --- audience chips --- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.chip{border:1px solid var(--navy-3);border-radius:100px;padding:8px 16px;font-size:13.5px;
+  color:var(--silver);background:rgba(15,39,71,.5)}
+
+/* --- guardrail callout --- */
+.guard{border:1px solid rgba(249,115,22,.42);border-radius:var(--r-lg);
+  background:linear-gradient(150deg,rgba(249,115,22,.09),rgba(10,22,40,.55));
+  padding:clamp(26px,3.6vw,40px)}
+.guard h2,.guard h3{font-size:clamp(20px,2.5vw,26px);margin-bottom:14px}
+.guard ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:13px}
+.guard li{padding-left:30px;position:relative;color:var(--silver);font-size:15.5px;line-height:1.6}
+.guard li::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:5px;
+  background:rgba(249,115,22,.18);border:1px solid rgba(249,115,22,.5)}
+
+/* --- the three entry points --- */
+.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.method{border:1px solid var(--navy-3);border-radius:var(--r-lg);padding:28px 26px;
+  background:linear-gradient(165deg,rgba(15,39,71,.6),rgba(10,22,40,.6));
+  transition:border-color .2s var(--e),transform .2s var(--e)}
+.method:hover{border-color:rgba(249,115,22,.45);transform:translateY(-3px)}
+.method .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;
+  background:rgba(249,115,22,.13);border:1px solid rgba(249,115,22,.34);color:var(--orange)}
+.method h3{font-size:19px;margin-bottom:8px}
+.method p{color:var(--slate);font-size:14.5px;margin:0}
+
+/* --- the disclosure card: shown vs withheld --- */
+.disclose{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--navy-3);
+  border-radius:var(--r-lg);overflow:hidden;background:rgba(10,22,40,.5)}
+.disclose > div{padding:28px 26px}
+.disclose .shown{background:linear-gradient(160deg,rgba(34,197,94,.08),rgba(10,22,40,.4));
+  border-right:1px solid var(--navy-3)}
+.disclose .held{background:linear-gradient(160deg,rgba(15,39,71,.5),rgba(10,22,40,.5))}
+.disclose h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;
+  font-family:var(--dsp);font-weight:700}
+.disclose .shown h3{color:var(--ok)}
+.disclose .held h3{color:var(--slate)}
+.dl{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.dl li{display:flex;align-items:center;gap:11px;font-size:15px;color:var(--paper);line-height:1.4}
+.dl svg{flex:none}
+.disclose .shown .dl svg{color:var(--ok)}
+.disclose .held .dl li{color:var(--slate)}
+.disclose .held .dl svg{color:var(--slate)}
+.dl .tag{margin-left:auto;font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  font-family:var(--dsp);font-weight:700;color:var(--slate)}
+
+/* --- exchange mode + action tiles --- */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tier{border:1px solid var(--navy-3);border-radius:var(--r);padding:24px 22px;
+  background:linear-gradient(165deg,rgba(15,39,71,.6),rgba(10,22,40,.6));
+  transition:border-color .2s var(--e),transform .2s var(--e)}
+.tier:hover{border-color:rgba(249,115,22,.45);transform:translateY(-3px)}
+.tier .n{font-family:var(--dsp);font-size:11px;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:12px;display:block;font-weight:700}
+.tier h3{font-size:18px;margin-bottom:9px}
+.tier p{color:var(--slate);font-size:14.5px;margin:0}
+
+/* --- phone mock --- */
+.wallet{width:300px;margin-inline:auto;padding:20px 16px 26px;border-radius:34px;
+  background:#060C16;border:9px solid #0E1B2E;
+  box-shadow:0 40px 90px -34px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.05)}
+.wallet-h{font-family:var(--dsp);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--slate);text-align:center;margin-bottom:16px}
+.idcard{border-radius:16px;padding:18px 16px;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#123A6B,#0B1E38);border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 14px 34px -12px rgba(0,0,0,.75)}
+.idcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.idcard-org{font-family:var(--dsp);font-size:11.5px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff}
+.idcard-seal{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(249,115,22,.75);
+  display:grid;place-items:center;color:var(--orange);flex:none}
+.idcard-name{font-family:var(--dsp);font-weight:800;font-size:17px;color:#fff;margin-bottom:12px}
+.sig{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.sig li{display:flex;align-items:center;gap:9px;font-size:12.5px;color:rgba(255,255,255,.85);line-height:1.4}
+.sig svg{flex:none;color:var(--ok)}
+.idcard-foot{margin-top:15px;padding-top:11px;border-top:1px solid rgba(255,255,255,.13);
+  font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:var(--dsp)}
+.idcard-foot b{color:var(--orange);font-weight:700}
+.wallet-note{text-align:center;font-size:12px;color:var(--slate);margin:16px 0 0}
+
+@media(max-width:900px){
+  .methods,.tiers,.disclose{grid-template-columns:1fr}
+  .disclose .shown{border-right:none;border-bottom:1px solid var(--navy-3)}
+}
+@media(max-width:560px){.tiers{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="shell nav-in">
+    <a class="brand" href="index.html" aria-label="Knite Lyfe home">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l10 4.2v8.4C26 22.7 21.6 28 16 29.6 10.4 28 6 22.7 6 15.6V7.2L16 3z" fill="none" stroke="#F97316" stroke-width="2.2"/><path d="M16 10v10M11.5 14.5h9" stroke="#F97316" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span><span class="kl">Knite</span> <span class="lf">Lyfe</span></span>
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="knite-exchange.html" aria-current="page">Knite ID</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="features.html">Features</a>
+      <a href="knite-campus.html">Campus</a>
+      <a href="about.html">About</a>
+      <a href="safety.html">Safety</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-p btn-sm" href="contact.html#waitlist">Waitlist</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="glow glow-o" aria-hidden="true"></div>
+  <div class="shell">
+    <span class="eyebrow">Knite ID · Knite Exchange</span>
+    <h1>Share your Knite, not your number.</h1>
+    <p class="lede">Meeting someone from a marketplace listing, a dating app or a group chat usually starts with handing over a phone number to a stranger. Knite Exchange is being designed as the step in between — enough to know who you're dealing with, without giving away how to reach you everywhere else.</p>
+    <div class="hero-cta">
+      <a class="btn btn-p" href="contact.html#waitlist" data-analytics="exchange_hero_waitlist">Join the waitlist</a>
+      <a class="btn btn-g" href="#how" data-analytics="exchange_hero_how">See how an exchange works</a>
+    </div>
+    <p class="hero-note">Knite Lyfe is in development. Everything on this page describes the intended product, not a shipped one.</p>
+  </div>
+</section>
+
+<!-- ============ THE PRINCIPLE ============ -->
+<section class="sec">
+  <div class="shell">
+    <div class="split rv">
+      <div>
+        <span class="eyebrow">The principle</span>
+        <h2>Verify more. Reveal less.</h2>
+        <p class="lede">Almost every identity check works by handing over more than the question required. Someone asks whether you're over 21 and you show a card carrying your address, your licence number and your date of birth.</p>
+        <p>Knite ID is designed the other way around. It confirms the specific things that matter for a real-world meeting, and shares the confirmation rather than the document behind it. The intent is that the other person learns you're real and roughly who you claim to be, and learns nothing else.</p>
+        <p style="color:var(--slate)"><b style="color:var(--paper)">Prove the fact. Protect the data.</b> That is the design goal, and it is the reason the exchange exists at all.</p>
+      </div>
+      <div>
+        <div class="wallet">
+          <p class="wallet-h">What the other person sees</p>
+          <div class="idcard">
+            <div class="idcard-top">
+              <span class="idcard-org">Knite ID</span>
+              <span class="idcard-seal" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+            </div>
+            <p class="idcard-name">Alex M.</p>
+            <ul class="sig">
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Identity verified</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Photo verified</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> 21+ verified</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Member since 2026</li>
+            </ul>
+            <div class="idcard-foot"><b>Verified</b> · nothing else shared</div>
+          </div>
+          <p class="wallet-note">Illustration of the intended design, not a screenshot.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band"><div class="shell"><p>Verified, <em>not exposed.</em></p></div></div>
+
+<!-- ============ CHOOSE WHAT THEY SEE ============ -->
+<section class="sec sec-alt">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">Selective disclosure</span>
+      <h2>Choose what they see.</h2>
+      <p class="lede">Every exchange is meant to be composed before it's sent. Verification signals are separate from personal details, and the second group stays out unless you deliberately put it in.</p>
+    </div>
+    <div class="disclose rv">
+      <div class="shown">
+        <h3>Verification signals</h3>
+        <ul class="dl">
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Identity verified</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Photo match verified</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> 21+ verified</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Account in good standing</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Member since 2026</li>
+        </ul>
+        <p style="color:var(--slate);font-size:14px;margin:20px 0 0">Outcomes of a check — not the information the check was run against.</p>
+      </div>
+      <div class="held">
+        <h3>Stays yours unless you add it</h3>
+        <ul class="dl">
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Phone number <span class="tag">Private</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Home address <span class="tag">Private</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Full date of birth <span class="tag">Private</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Identity documents <span class="tag">Private</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Email and social accounts <span class="tag">Private</span></li>
+        </ul>
+        <p style="color:var(--slate);font-size:14px;margin:20px 0 0">You can add a first name, a photo, or a way to reach you — a social handle rather than a number, if you'd rather keep the number. The point is that each one is a decision, not a default.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THREE WAYS ============ -->
+<section class="sec" id="how">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">Knite Exchange</span>
+      <h2>Send. Scan. Tap.</h2>
+      <p class="lede">Three entry points into the same exchange. Which one you use depends on whether the other person is across a table or across the internet.</p>
+    </div>
+    <div class="methods rv">
+      <div class="method">
+        <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h10M10 7l5 5-5 5M17 4h3v16h-3"/></svg></div>
+        <h3>Send</h3>
+        <p>Share a <b>Knite Link</b> through whatever you're already talking on — a marketplace thread, a dating app, a group chat, a message. Useful when you haven't met yet and don't want to swap numbers to find out whether you should.</p>
+      </div>
+      <div class="method">
+        <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 011-1h3M16 4h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3"/><rect x="8.5" y="8.5" width="7" height="7" rx="1"/></svg></div>
+        <h3>Scan</h3>
+        <p>Show your <b>Knite QR</b> and let the other person scan it. The code is intended to start an exchange rather than carry your details — nothing personal is meant to live inside the image itself.</p>
+      </div>
+      <div class="method">
+        <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="7" height="14" rx="1.6"/><rect x="14" y="4" width="7" height="14" rx="1.6"/><path d="M11.4 11.6h1.4M11.4 14.4h1.4"/></svg></div>
+        <h3>Tap</h3>
+        <p><b>Tap to Knite</b> — bring two compatible phones together and the exchange starts. Meant to feel like swapping contacts, not running a background check. Tap depends on device support and is a planned capability, not a current one.</p>
+      </div>
+    </div>
+    <p class="hero-note rv" style="margin-top:26px">These are three doors into one system. What happens after you walk through is the same either way.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT HAPPENS NEXT ============ -->
+<section class="sec sec-alt">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">Verify is not connect</span>
+      <h2>An exchange doesn't make you friends.</h2>
+      <p class="lede">Scanning someone's Knite is not meant to create a permanent relationship. It answers a question, and then you decide what — if anything — happens next. A marketplace buyer may only ever need the first of these.</p>
+    </div>
+    <div class="tiers rv">
+      <div class="tier"><span class="n">Option one</span><h3>Verify</h3><p>See the signals they chose to share, and nothing more. The exchange can end here, and often should.</p></div>
+      <div class="tier"><span class="n">Option two</span><h3>Connect</h3><p>Add each other as Knite connections, so a future exchange doesn't start from scratch.</p></div>
+      <div class="tier"><span class="n">Option three</span><h3>Share</h3><p>Hand over a way to reach you, once you've decided the person is worth reaching — a social handle or a username-based app, so it isn't your phone number by default.</p></div>
+      <div class="tier"><span class="n">Option four</span><h3>Start a Safety Plan</h3><p>Open a temporary session around the meeting itself — where, when, and who's expecting to hear from you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXCHANGE MODES ============ -->
+<section class="sec">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">Modes</span>
+      <h2>Not every exchange should last forever.</h2>
+      <p class="lede">A person you're about to sell a bike to does not need permanent access to anything. The intent is that the exchange itself can be scoped to the situation.</p>
+    </div>
+    <div class="tiers rv">
+      <div class="tier"><span class="n">Standard</span><h3>Standard Knite</h3><p>A reusable exchange for ordinary social situations, where being reachable later is the point.</p></div>
+      <div class="tier"><span class="n">Time-limited</span><h3>Temporary Knite</h3><p>A link or code intended to stop working after a set window — long enough for the meeting, not longer.</p></div>
+      <div class="tier"><span class="n">Single use</span><h3>One-Time Knite</h3><p>Designed to become invalid once it has been used. Built for strangers and one-off transactions.</p></div>
+      <div class="tier"><span class="n">Mutual</span><h3>Reciprocal Exchange</h3><p>Both people agree first, and neither receives the other's information until both have accepted.</p></div>
+    </div>
+    <div class="guard rv" style="margin-top:30px">
+      <h3>Trust should work both ways.</h3>
+      <p style="color:var(--silver);margin:0">Reciprocal exchange matters more than it sounds. A one-directional check makes one person the subject of an investigation and the other the investigator, which is a strange way to begin. When both sides verify at once, it reads as what it is — two people establishing enough confidence to meet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE JOURNEY ============ -->
+<section class="sec sec-alt">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">End to end</span>
+      <h2>From online conversation to real-world connection.</h2>
+      <p class="lede">This is where Knite ID stops being a credential and becomes part of the safety system. The exchange establishes who; the plan handles what happens next.</p>
+    </div>
+    <div class="route rv">
+      <div class="stop"><h3>1 · Meet online</h3><p>A listing, a match, a group chat, a gaming server. The conversation starts somewhere you'd rather not hand over a phone number.</p></div>
+      <div class="stop"><h3>2 · Send your Knite</h3><p>A link goes through the platform you're already using. No new account required for them to look at it.</p></div>
+      <div class="stop"><h3>3 · Verify each other</h3><p>Both sides see the signals the other chose to share. Reciprocal by default, so nobody is being audited.</p></div>
+      <div class="stop"><h3>4 · Choose what to share</h3><p>Maybe nothing beyond the verification. Maybe a first name and a photo. Maybe a number, once there's a reason.</p></div>
+      <div class="stop"><h3>5 · Start a Safety Plan</h3><p>For a meeting that warrants it: where, when, how long, and which trusted contact is expecting to hear from you.</p></div>
+      <div class="stop"><h3>6 · Meet, then close the plan</h3><p>You confirm you're done. The session ends and sharing stops with it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USE CASES ============ -->
+<section class="sec">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">Where it earns its place</span>
+      <h2>Met online? Share your Knite first.</h2>
+      <p class="lede">The common thread is a conversation that started on a platform and has to finish in person.</p>
+    </div>
+    <div class="grid g3 rv">
+      <article class="card">
+        <div class="shot" style="aspect-ratio:16/10"><span>Photo: two people meeting in a daylit public car park to hand over a boxed item</span></div>
+        <div style="padding:26px 24px 28px">
+          <h3>Marketplace</h3>
+          <p>Verify before the handoff, then meet with a plan. Two strangers can establish that each is a real, verified person without either one learning where the other lives.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot" style="aspect-ratio:16/10"><span>Photo: two people meeting for the first time at a busy café table, seen from outside</span></div>
+        <div style="padding:26px 24px 28px">
+          <h3>Dating</h3>
+          <p>Know they're real before you reveal more. Confirmation that a person exists, matches their photo and is in the age range they claim — without either of you sending documents.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot" style="aspect-ratio:16/10"><span>Photo: friends arriving at a lit venue entrance in the evening, seen from behind</span></div>
+        <div style="padding:26px 24px 28px">
+          <h3>Nightlife, travel &amp; social</h3>
+          <p>Exchange a Knite without exchanging your number. Useful with people you've just met and may want to reach again — or may not.</p>
+        </div>
+      </article>
+    </div>
+    <div class="chips rv">
+      <span class="chip">Marketplace listings</span><span class="chip">Dating apps</span><span class="chip">Group chats</span>
+      <span class="chip">Gaming communities</span><span class="chip">Local meetups</span><span class="chip">Travel</span>
+      <span class="chip">Event communities</span><span class="chip">Community groups</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE HONEST LIMIT ============ -->
+<section class="sec sec-alt">
+  <div class="shell">
+    <div class="guard rv">
+      <span class="eyebrow">Read this part</span>
+      <h2>Verification does not mean safe.</h2>
+      <p class="lede" style="margin-bottom:0">This is the most important sentence on the page, and we would rather it were the one you remember.</p>
+      <ul>
+        <li><b style="color:var(--paper)">What verification can help establish:</b> that the person is real, that certain identity attributes have been confirmed, and that they are not entirely anonymous</li>
+        <li><b style="color:var(--paper)">What it cannot establish:</b> character, intentions, future behaviour, or criminal history</li>
+        <li>A verified person can still be someone you should not meet. A Knite is a piece of context, not a character reference</li>
+        <li>Knite Lyfe is not an emergency service and cannot guarantee anyone's safety</li>
+      </ul>
+      <p style="margin:24px 0 0;color:var(--paper);font-size:16.5px"><b>Verification adds context. It does not replace judgement.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section class="sec">
+  <div class="shell">
+    <div class="split flip rv">
+      <div>
+        <span class="eyebrow">How we're approaching privacy</span>
+        <h2>Don't reveal what you don't need to.</h2>
+        <p class="lede">A privacy promise built on stopping screenshots is not a privacy promise. If information has been handed over, the question of what happens to it next is already out of your control.</p>
+        <p>So the approach is to limit what leaves in the first place. The aim is that an exchange carries the outcome of a check rather than the material behind it — a confirmation that something is true, not the document that proved it.</p>
+        <p style="color:var(--slate)">Formal privacy documentation, data-retention practice and independent security review are still being completed, and we will publish specifics when they are real rather than aspirational.</p>
+      </div>
+      <div>
+        <div class="guard">
+          <h3>Somewhere to talk that isn't your number</h3>
+          <p style="color:var(--silver)">Knite Lyfe is not going to be another inbox. There are enough of those, and a safety app is a strange place to keep a conversation.</p>
+          <p style="color:var(--silver)">What an exchange can carry instead is a way to reach you that isn't tied to your phone. A handle on a platform that identifies people by username rather than number means the other person can message you about the pickup time — and you can block them, or simply stop replying, without having handed over something attached to your identity, your bank, your two-factor codes and every account you own.</p>
+          <p style="color:var(--slate);font-size:14.5px;margin:16px 0 0">A phone number is permanent and difficult to take back. A username is neither. That difference is the whole point.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="sec sec-alt">
+  <div class="shell">
+    <div class="cta rv">
+      <span class="eyebrow">Early access</span>
+      <h2>Verify once. Use your Knite again.</h2>
+      <p class="lede">A Knite ID is intended to be set up once and reused — every marketplace meetup, every first meeting, every time someone reasonably wants to know you're real. We're building it now and would rather hear from people who'd actually use it.</p>
+      <div class="cta-row">
+        <a class="btn btn-p" href="contact.html#waitlist" data-analytics="exchange_cta_waitlist">Join the waitlist</a>
+        <a class="btn btn-g" href="safety.html" data-analytics="exchange_cta_safety">Read our safety principles</a>
+      </div>
+      <p class="hero-note" style="margin-top:22px">Knite Lyfe is pre-release. There is nothing to download yet, and no exchange can be created today.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l10 4.2v8.4C26 22.7 21.6 28 16 29.6 10.4 28 6 22.7 6 15.6V7.2L16 3z" fill="none" stroke="#F97316" stroke-width="2.2"/><path d="M16 10v10M11.5 14.5h9" stroke="#F97316" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <span><span class="kl">Knite</span> <span class="lf">Lyfe</span></span>
+        </a>
+        <img class="foot-mark" src="img/helmet.png" alt="" aria-hidden="true" loading="lazy">
+        <p class="tagline">To reclaim safety and peace of mind for people in social and public settings.</p>
+      </div>
+      <div><h4>Product</h4><ul>
+        <li><a href="knite-exchange.html">Knite ID &amp; Exchange</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="knite-campus.html">Knite Lyfe Campus</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="perspective.html">Perspective</a></li>
+        <li><a href="safety.html">Safety &amp; Trust</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="safety.html">Privacy Policy</a></li>
+        <li><a href="safety.html">Terms of Service</a></li>
+        <li><a href="safety.html">Safety Notice</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Knite Lyfe, Inc. All rights reserved.</span>
+      <span>8 The Green STE B, Dover, DE 19901 · adminknitelyfe@gmail.com · 302-497-8630</span>
+    </div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

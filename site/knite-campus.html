@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knite Lyfe Campus — Safety Technology Built for Campus Life</title>
+<meta name="description" content="Give students the full Knite Lyfe experience plus a digital university ID. Institutional packages for campuses, residence life, student organizations and programs.">
+<meta property="og:title" content="Knite Lyfe Campus — Safety Technology Built for Campus Life">
+<meta property="og:description" content="Give students the full Knite Lyfe experience plus a digital university ID. Institutional packages for campuses, residence life, student organizations and programs.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A1628">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230A1628'/><path d='M16 6l7 3v7c0 5-3 9.4-7 10.6C12 25.4 9 21 9 16V9l7-3z' fill='%23F97316'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* knite campus — page-specific */
+/* scene artwork fills the former photo slots */
+.shot{padding:0;overflow:hidden}
+.shot .scene{width:100%;height:100%;display:block;object-fit:cover}
+.shot.has-scene span{display:none}
+.mark-slot{display:grid;place-items:center;padding:34px}
+.mark-slot img{max-width:62%;height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.5))}
+
+/* ============================================================
+   Programs additions
+   ============================================================ */
+/* --- big choice cards on the Programs hub --- */
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pick-card{
+  position:relative;display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid var(--navy-3);border-radius:var(--r-lg);
+  background:linear-gradient(160deg,rgba(15,39,71,.7),rgba(10,22,40,.7));
+  transition:transform .24s var(--e),border-color .24s var(--e)
+}
+.pick-card:hover{transform:translateY(-5px);border-color:rgba(249,115,22,.5)}
+.pick-card .shot{aspect-ratio:16/10}
+.pick-b{padding:28px 28px 32px;display:flex;flex-direction:column;flex:1}
+.pick-b h3{font-size:clamp(21px,2.5vw,27px);margin-bottom:10px}
+.pick-b .sub{color:var(--orange);font-weight:600;font-size:15.5px;margin-bottom:14px}
+.pick-b p{color:var(--slate);font-size:15px;flex:1}
+.pick-go{
+  display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+  font-family:var(--dsp);font-weight:700;font-size:14px;color:var(--orange)
+}
+.pick-card:hover .pick-go{gap:13px}
+.pick-go svg{transition:transform .2s var(--e)}
+
+/* --- digital ID card mockup --- */
+.wallet{
+  width:300px;margin-inline:auto;padding:20px 16px 26px;border-radius:34px;
+  background:#060C16;border:9px solid #0E1B2E;
+  box-shadow:0 40px 90px -34px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.05)
+}
+.wallet-h{
+  font-family:var(--dsp);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--slate);text-align:center;margin-bottom:16px
+}
+.idcard{
+  border-radius:16px;padding:18px 16px;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#123A6B,#0B1E38);border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 14px 34px -12px rgba(0,0,0,.75)
+}
+.idcard.stack2{margin-top:-118px;transform:scale(.94);opacity:.55;z-index:-1;position:relative}
+.idcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.idcard-org{font-family:var(--dsp);font-size:11.5px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff;line-height:1.35;max-width:16ch}
+.idcard-seal{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(249,115,22,.75);
+  display:grid;place-items:center;color:var(--orange);flex:none}
+.idcard-body{display:flex;gap:13px;align-items:center}
+.idcard-photo{
+  width:62px;height:76px;border-radius:8px;flex:none;
+  background:linear-gradient(160deg,#2A4straight,#1B3557);
+  background:linear-gradient(160deg,#2B4E7E,#16304F);
+  border:1px solid rgba(255,255,255,.18);display:grid;place-items:center
+}
+.idcard-photo span{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.42);text-align:center;line-height:1.5;padding:4px}
+.idcard-name{font-family:var(--dsp);font-weight:800;font-size:16px;color:#fff;margin-bottom:3px}
+.idcard-meta{font-size:11.5px;color:rgba(255,255,255,.62);line-height:1.75}
+.idcard-foot{
+  margin-top:14px;padding-top:11px;border-top:1px solid rgba(255,255,255,.13);
+  display:flex;justify-content:space-between;align-items:center;font-size:10px;
+  letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:var(--dsp)
+}
+.idcard-foot b{color:var(--orange);font-weight:700}
+.wallet-note{text-align:center;font-size:12px;color:var(--slate);margin:16px 0 0}
+
+/* --- packaging tiles --- */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tier{
+  border:1px solid var(--navy-3);border-radius:var(--r);padding:24px 22px;
+  background:linear-gradient(165deg,rgba(15,39,71,.6),rgba(10,22,40,.6));
+  transition:border-color .2s var(--e),transform .2s var(--e)
+}
+.tier:hover{border-color:rgba(249,115,22,.45);transform:translateY(-3px)}
+.tier .n{font-family:var(--dsp);font-size:11px;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:12px;display:block;font-weight:700}
+.tier h3{font-size:18px;margin-bottom:9px}
+.tier p{color:var(--slate);font-size:14.5px;margin:0}
+
+/* --- compare table --- */
+.cmp{width:100%;border-collapse:collapse;font-size:15px}
+.cmp th,.cmp td{padding:15px 16px;text-align:left;border-bottom:1px solid var(--navy-3);vertical-align:top}
+.cmp thead th{
+  font-family:var(--dsp);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--orange);border-bottom-color:rgba(249,115,22,.35)
+}
+.cmp tbody th{font-weight:600;color:var(--paper);font-family:var(--body);font-size:15px}
+.cmp td{color:var(--slate)}
+.cmp-wrap{overflow-x:auto;border:1px solid var(--navy-3);border-radius:var(--r);
+  background:rgba(15,39,71,.4)}
+
+/* --- guardrail callout --- */
+.guard{
+  border:1px solid rgba(249,115,22,.42);border-radius:var(--r-lg);
+  background:linear-gradient(150deg,rgba(249,115,22,.09),rgba(10,22,40,.55));
+  padding:clamp(26px,3.6vw,40px)
+}
+.guard h3{font-size:clamp(20px,2.5vw,26px);margin-bottom:14px}
+.guard ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:13px}
+.guard li{padding-left:30px;position:relative;color:var(--silver);font-size:15.5px;line-height:1.6}
+.guard li::before{
+  content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:5px;
+  background:rgba(249,115,22,.18);border:1px solid rgba(249,115,22,.5)
+}
+
+/* --- audience chips --- */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.chip{
+  border:1px solid var(--navy-3);border-radius:100px;padding:8px 16px;font-size:13.5px;
+  color:var(--silver);background:rgba(15,39,71,.5)
+}
+
+@media(max-width:900px){
+  .pick,.tiers{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .tiers{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="shell nav-in">
+    <a class="brand" href="index.html" aria-label="Knite Lyfe home">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l10 4.2v8.4C26 22.7 21.6 28 16 29.6 10.4 28 6 22.7 6 15.6V7.2L16 3z" fill="none" stroke="#F97316" stroke-width="2.2"/><path d="M16 10v10M11.5 14.5h9" stroke="#F97316" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span><span class="kl">Knite</span> <span class="lf">Lyfe</span></span>
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="knite-exchange.html">Knite ID</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="features.html">Features</a>
+      <a href="knite-campus.html" aria-current="page">Campus</a>
+      <a href="about.html">About</a>
+      <a href="safety.html">Safety</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-p btn-sm" href="contact.html#waitlist">Waitlist</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="hero" style="padding-bottom:44px">
+  <div class="glow glow-o" style="width:600px;height:600px;top:-240px;left:-160px"></div>
+  <div class="shell hero-grid">
+    <div>
+      <span class="eyebrow">Knite Lyfe Campus</span>
+      <h1>Students gain freedom. Universities provide <em>another layer of support</em>.</h1>
+      <p class="lede">Campus safety infrastructure was built for campus. Student life isn't. Knite Lyfe Campus gives adult students the full platform — and gives institutions a way to provide it to whole populations at once.</p>
+      <div class="hero-cta"><a class="btn btn-p" href="#campus">Bring Knite Lyfe to your campus</a></div>
+      <div class="chips">
+        <span class="chip">Universities</span><span class="chip">Colleges</span>
+        <span class="chip">Residence halls</span><span class="chip">Student organizations</span>
+        <span class="chip">Greek life</span><span class="chip">Athletics</span>
+        <span class="chip">Study abroad</span><span class="chip">First-year programs</span>
+      </div>
+    </div>
+    <div class="rv"><div class="shot tall has-scene" style="border:1px solid var(--navy-3);border-radius:var(--r-lg)"><img class="scene" src="img/scenes/residence-hall.jpg" alt="two students walking back to a residence hall at night, phones in hand" loading="lazy"><span>Photo: two students walking back to a residence hall at night, phones in hand</span></div></div>
+  </div>
+</section>
+
+<!-- DIGITAL UNIVERSITY ID -->
+<section class="sec sec-alt">
+  <div class="shell split">
+    <div class="rv">
+      <span class="eyebrow">Digital University ID</span>
+      <h2 style="font-size:clamp(27px,3.7vw,42px);margin-bottom:18px">Your campus ID, in your pocket.</h2>
+      <p class="lede">Participating institutions can issue students a digital university ID designed for supported mobile digital wallets — a natural extension of the campus identity students already carry.</p>
+      <p class="lede">It sits alongside the rest of the Knite Lyfe experience, so identity and safety live in the same place instead of two apps and a plastic card.</p>
+      <div class="guard" style="margin-top:26px">
+        <h3 style="font-size:17px;margin-bottom:10px">What we're not claiming</h3>
+        <p style="color:var(--silver);font-size:15px;margin:0">We haven't announced compatibility with any specific wallet platform, door-access system or campus card vendor. Where an institution needs that, it's a conversation — not a checkbox on a marketing page.</p>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="wallet">
+        <div class="wallet-h">Wallet</div>
+        <div class="idcard">
+          <div class="idcard-top">
+            <div class="idcard-org">State University</div>
+            <div class="idcard-seal"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 1.6l4.6 1.9v3.7c0 3-2 5.4-4.6 6.2-2.6-.8-4.6-3.2-4.6-6.2V3.5L7 1.6z"/></svg></div>
+          </div>
+          <div class="idcard-body">
+            <div class="idcard-photo"><span>Student<br>photo</span></div>
+            <div>
+              <div class="idcard-name">A. Morales</div>
+              <div class="idcard-meta">Undergraduate<br>Class of 2029<br>ID ·&nbsp;•••• 4417</div>
+            </div>
+          </div>
+          <div class="idcard-foot"><span>Knite Lyfe Campus</span><b>Verified</b></div>
+        </div>
+        <p class="wallet-note">Concept mockup. Design in progress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL EXPERIENCE -->
+<section class="sec">
+  <div class="shell">
+    <div class="sec-head rv"><span class="eyebrow">The full experience</span>
+      <h2>Adults get the whole platform.</h2>
+      <p class="lede">University students aren't given a stripped-down version. It includes the complete Knite Lyfe experience, because the situations students actually face are the ones the platform was designed for.</p></div>
+    <div class="grid g3">
+      <div class="card rv"><h3>Knite ID</h3><p>A verified identity students can choose to share — useful well beyond campus.</p></div>
+      <div class="card rv"><h3>Trusted contacts</h3><p>Roommates, teammates, family. The people a student would actually call.</p></div>
+      <div class="card rv"><h3>Location-based safety tools</h3><p>Sharing tied to an active plan, controlled entirely by the student.</p></div>
+      <div class="card rv"><h3>Meeting safety</h3><p>First meetings, marketplace pickups, off-campus plans.</p></div>
+      <div class="card rv"><h3>Group safety</h3><p>For nights out, road trips, formals and the times a group splits up.</p></div>
+      <div class="card rv"><h3>Check-ins</h3><p>"Text me when you get home," without depending on anyone remembering.</p></div>
+      <div class="card rv"><h3>Safety notifications</h3><p>Enough information to be useful, restrained enough not to be ignored.</p></div>
+      <div class="card rv"><h3>Social and nightlife tools</h3><p>Built for the parts of student life that happen after the library closes.</p></div>
+      <div class="card rv"><h3>Digital university ID</h3><p>Campus identity in the same place as everything above.</p></div>
+    </div>
+    <div class="guard rv" style="margin-top:34px">
+      <h3>Independence is the point.</h3>
+      <p style="color:var(--silver);margin:0">Knite Lyfe Campus is deliberately not a parental monitoring tool. Students choose their own trusted contacts, decide what gets shared and when, and can turn sharing off. An institution that provides the software does not get a window into where its students are. Building it any other way would mean students uninstall it in week one — and a safety tool nobody uses protects nobody.</p>
+    </div>
+  </div>
+</section>
+
+<div class="band"><div class="shell"><p>Campus safety doesn't end at the <em>edge of campus</em>.</p></div></div>
+
+<!-- GROUP PACKAGING -->
+<section class="sec sec-alt" id="campus">
+  <div class="shell">
+    <div class="sec-head rv"><span class="eyebrow">Institutional packages</span>
+      <h2>Provide it to a population, not one student at a time.</h2>
+      <p class="lede">Safety tools work better when a whole friend group has them rather than one cautious person. Institutional distribution is how that happens.</p></div>
+    <div class="tiers">
+      <div class="tier rv"><span class="n">Package</span><h3>Campus-wide</h3><p>Knite Lyfe access for a broad student population, positioned as a campus resource.</p></div>
+      <div class="tier rv"><span class="n">Package</span><h3>Residence life</h3><p>Coverage for students living on or around campus, where most off-hours movement happens.</p></div>
+      <div class="tier rv"><span class="n">Package</span><h3>Student organizations</h3><p>Group access for clubs, Greek life, athletics and other communities that already look out for each other.</p></div>
+      <div class="tier rv"><span class="n">Package</span><h3>Programs &amp; cohorts</h3><p>Defined populations — incoming students, study abroad, or specific programs.</p></div>
+    </div>
+    <p class="dim rv" style="margin-top:26px;font-size:14.5px;max-width:70ch">Package structure and pricing are set in conversation with each institution. Knite Lyfe is pre-release; Knite Lyfe Campus is in development and not yet available for deployment.</p>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="sec">
+  <div class="shell">
+    <div class="sec-head rv"><span class="eyebrow">Bring Knite Lyfe to your campus</span><h2>Start the conversation.</h2>
+      <p class="lede">We're speaking with universities, student affairs teams, residence life and student organizations while we build. Early conversations shape the program.</p></div>
+    <form class="form rv" data-demo>
+      <div class="f-row">
+        <div><label for="u-name">Name <span class="req">*</span></label><input id="u-name" name="name" required></div>
+        <div><label for="u-title">Title / role</label><input id="u-title" name="title"></div>
+      </div>
+      <div class="f-row">
+        <div><label for="u-inst">Institution <span class="req">*</span></label><input id="u-inst" name="institution" required></div>
+        <div><label for="u-email">Email <span class="req">*</span></label><input id="u-email" name="email" type="email" required></div>
+      </div>
+      <div><label for="u-role">I'm reaching out as</label>
+        <select id="u-role" name="role">
+          <option>University administration</option><option>Student affairs</option>
+          <option>Campus safety / police</option><option>Residence life</option>
+          <option>Student organization or Greek life</option><option>Athletics</option>
+          <option>Study abroad or program office</option><option>Student</option><option>Other</option>
+        </select></div>
+      <div><label for="u-msg">What would you like to discuss? <span class="req">*</span></label><textarea id="u-msg" name="message" required></textarea></div>
+      <div><button class="btn btn-p" type="submit">Bring Knite Lyfe to my campus</button></div>
+      <p class="form-note dim" style="font-size:13.5px;margin:0">We'll reply within a few business days.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l10 4.2v8.4C26 22.7 21.6 28 16 29.6 10.4 28 6 22.7 6 15.6V7.2L16 3z" fill="none" stroke="#F97316" stroke-width="2.2"/><path d="M16 10v10M11.5 14.5h9" stroke="#F97316" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <span><span class="kl">Knite</span> <span class="lf">Lyfe</span></span>
+        </a>
+        <img class="foot-mark" src="img/helmet.png" alt="" aria-hidden="true" loading="lazy">
+        <p class="tagline">To reclaim safety and peace of mind for people in social and public settings.</p>
+      </div>
+      <div><h4>Product</h4><ul>
+        <li><a href="knite-exchange.html">Knite ID &amp; Exchange</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="knite-campus.html">Knite Lyfe Campus</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="perspective.html">Perspective</a></li>
+        <li><a href="safety.html">Safety &amp; Trust</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="safety.html">Privacy Policy</a></li>
+        <li><a href="safety.html">Terms of Service</a></li>
+        <li><a href="safety.html">Safety Notice</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Knite Lyfe, Inc. All rights reserved.</span>
+      <span>8 The Green STE B, Dover, DE 19901 · adminknitelyfe@gmail.com · 302-497-8630</span>
+    </div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

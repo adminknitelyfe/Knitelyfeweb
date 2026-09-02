@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knite Lyfe — Someone Should Always Have Your Back</title>
+<meta name="description" content="Knite Lyfe is personal safety technology for the moments when life takes you beyond familiar places and familiar people. Reclaim safety and peace of mind.">
+<meta property="og:title" content="Knite Lyfe — Someone Should Always Have Your Back">
+<meta property="og:description" content="Personal safety technology built for going out, meeting someone new, marketplace meetups, college life and travel.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knitelyfe.com/">
+<meta name="theme-color" content="#0A1628">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230A1628'/><path d='M16 6l7 3v7c0 5-3 9.4-7 10.6C12 25.4 9 21 9 16V9l7-3z' fill='%23F97316'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+/* index — page-specific */
+/* --- Knite Exchange: shown vs withheld --- */
+.disclose{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--navy-3);
+  border-radius:var(--r-lg);overflow:hidden;background:rgba(10,22,40,.5);margin-top:30px}
+.disclose > div{padding:26px 24px}
+.disclose .shown{background:linear-gradient(160deg,rgba(34,197,94,.08),rgba(10,22,40,.4));
+  border-right:1px solid var(--navy-3)}
+.disclose h3{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;
+  font-family:var(--dsp);font-weight:700}
+.disclose .shown h3{color:var(--ok)}
+.disclose .held h3{color:var(--slate)}
+.dl{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+.dl li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--paper);line-height:1.4}
+.dl svg{flex:none}
+.disclose .shown .dl svg{color:var(--ok)}
+.disclose .held .dl li,.disclose .held .dl svg{color:var(--slate)}
+.dl .tag{margin-left:auto;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  font-family:var(--dsp);font-weight:700;color:var(--slate)}
+.xmeth{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.xmeth div{border:1px solid var(--navy-3);border-radius:var(--r);padding:22px 20px;
+  background:linear-gradient(165deg,rgba(15,39,71,.55),rgba(10,22,40,.55))}
+.xmeth h3{font-size:17px;margin-bottom:7px}
+.xmeth p{color:var(--slate);font-size:14px;margin:0}
+@media(max-width:900px){
+  .disclose,.xmeth{grid-template-columns:1fr}
+  .disclose .shown{border-right:none;border-bottom:1px solid var(--navy-3)}
+}
+
+/* scene artwork fills the former photo slots */
+.shot{padding:0;overflow:hidden}
+.shot .scene{width:100%;height:100%;display:block;object-fit:cover}
+.shot.has-scene span{display:none}
+.mark-slot{display:grid;place-items:center;padding:34px}
+.mark-slot img{max-width:62%;height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.5))}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="shell nav-in">
+    <a class="brand" href="index.html" aria-label="Knite Lyfe home">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l10 4.2v8.4C26 22.7 21.6 28 16 29.6 10.4 28 6 22.7 6 15.6V7.2L16 3z" fill="none" stroke="#F97316" stroke-width="2.2"/><path d="M16 10v10M11.5 14.5h9" stroke="#F97316" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span><span class="kl">Knite</span> <span class="lf">Lyfe</span></span>
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="knite-exchange.html">Knite ID</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="features.html">Features</a>
+      <a href="knite-campus.html">Campus</a>
+      <a href="about.html">About</a>
+      <a href="safety.html">Safety</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-p btn-sm" href="contact.html#waitlist">Waitlist</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="glow glow-o" style="width:620px;height:620px;top:-220px;left:-140px"></div>
+  <div class="glow glow-b" style="width:560px;height:560px;bottom:-260px;right:-160px"></div>
+  <img class="mark-wm" src="img/helmet.png" alt="" aria-hidden="true" style="width:min(52vw,620px);top:-6%;right:-10%">
+  <div class="shell hero-grid">
+    <div>
+      <span class="eyebrow">Personal safety technology</span>
+      <h1>Someone should always have your <em>back</em>.</h1>
+      <p class="lede">Personal safety technology built for the moments when life takes you beyond familiar places and familiar people.</p>
+      <div class="hero-cta">
+        <a class="btn btn-p" href="how-it-works.html">See how it works</a>
+        <a class="btn btn-g" href="contact.html#waitlist">Join the waitlist</a>
+      </div>
+      <p class="hero-note"><span class="pulse"></span> In development — first release planned for 2027.</p>
+    </div>
+
+    <!-- SIGNATURE: the ritual people already have -->
+    <div class="thread rv">
+      <div class="thread-h">You already do this</div>
+      <div class="msg">Who are you meeting?</div>
+      <div class="msg me">Just someone from the app. Meeting at the coffee place on Main.</div>
+      <div class="msg">Send me your location</div>
+      <div class="msg me">Sent 📍</div>
+      <div class="msg">Text me when you get home</div>
+      <div class="thread-foot">
+        Every day, people build informal safety systems out of group chats and screenshots.
+        <b>Knite Lyfe turns that instinct into something that actually works.</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="sec sec-alt">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">The gap</span>
+      <h2>You can verify a package. You can verify a payment. You can verify a ride.</h2>
+      <p class="lede">You cannot verify the person you're about to meet. More of life now begins online and finishes in person — and that handoff is where the tools run out.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card rv"><div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="6.5" r="3.4"/><path d="M3.6 17.5c0-3.3 2.9-5.4 6.4-5.4s6.4 2.1 6.4 5.4"/></svg></div>
+        <h3>Unconfirmed identity</h3><p>A profile is not a person. Photos and names are the easiest things in the world to fake.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 2.5c3.3 0 6 2.6 6 5.9 0 4.4-6 9.1-6 9.1S4 13.8 4 8.4c0-3.3 2.7-5.9 6-5.9z"/><circle cx="10" cy="8.2" r="2"/></svg></div>
+        <h3>Plans that live nowhere</h3><p>The details sit in a group chat somebody has already scrolled past.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="7.4"/><path d="M10 5.6V10l3 2"/></svg></div>
+        <h3>No one keeping time</h3><p>"Text me when you get home" only works if someone remembers to notice you didn't.</p></div>
+      <div class="card rv"><div class="ic"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 2.6l7.2 3v5.2c0 4.5-3 8.2-7.2 9.4-4.2-1.2-7.2-4.9-7.2-9.4V5.6l7.2-3z"/></svg></div>
+        <h3>Help that isn't ready</h3><p>In the moment you need it, fumbling for a phone is the last thing you should be doing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<!-- ============ KNITE EXCHANGE ============ -->
+<section class="sec">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">Knite Exchange</span>
+      <h2>Share your Knite, not your number.</h2>
+      <p class="lede">Meeting someone from a listing or an app usually starts by handing a stranger your phone number. Knite Exchange is being designed as the step in between — enough for both people to know who they're dealing with, without giving away how to reach you everywhere else.</p>
+    </div>
+
+    <div class="xmeth rv">
+      <div><h3>Send</h3><p>Share a secure <b>Knite Link</b> through the platform you're already talking on.</p></div>
+      <div><h3>Scan</h3><p>Show your <b>Knite QR</b> and let them scan it, in person.</p></div>
+      <div><h3>Tap</h3><p>Bring two compatible phones together. A planned capability, subject to device support.</p></div>
+    </div>
+
+    <div class="disclose rv">
+      <div class="shown">
+        <h3>What they see</h3>
+        <ul class="dl">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Identity verified</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Photo verified</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> 21+ verified</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Member since 2026</li>
+        </ul>
+      </div>
+      <div class="held">
+        <h3>What stays yours</h3>
+        <ul class="dl">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Phone number <span class="tag">Private</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Home address <span class="tag">Private</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Full date of birth <span class="tag">Private</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Identity documents <span class="tag">Private</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="lede rv" style="margin-top:28px"><b>Verification adds context. It doesn't replace judgement.</b> Knowing someone is real is not the same as knowing they're safe, and we won't pretend otherwise.</p>
+    <div class="cta-row rv" style="margin-top:22px">
+      <a class="btn btn-p" href="knite-exchange.html" data-analytics="home_exchange_cta">Explore Knite ID &amp; Exchange</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt">
+  <div class="shell">
+    <div class="sec-head rv">
+      <span class="eyebrow">Built for real life</span>
+      <h2>Go live your life. We'll help the people who care about you stay connected to it.</h2>
+    </div>
+    <div class="grid g3">
+      <article class="card uc rv">
+        <div class="shot has-scene"><img class="scene" src="img/scenes/going-out.jpg" alt="friends leaving a bar together on a lit city street at night" loading="lazy"><span>Photo: friends leaving a bar together on a lit city street at night</span></div>
+        <div class="uc-b"><h3>Going out</h3><p>Stay connected with the people you trust, without texting updates all night.</p></div>
+      </article>
+      <article class="card uc rv">
+        <div class="shot has-scene"><img class="scene" src="img/scenes/meeting-someone-new.jpg" alt="two people meeting for coffee at a window table, daytime" loading="lazy"><span>Photo: two people meeting for coffee at a window table, daytime</span></div>
+        <div class="uc-b"><h3>Meeting someone new</h3><p>Add a layer of accountability before a first meeting — for both of you.</p></div>
+      </article>
+      <article class="card uc rv">
+        <div class="shot has-scene"><img class="scene" src="img/scenes/marketplace.jpg" alt="marketplace handoff in a public parking lot, afternoon" loading="lazy"><span>Photo: marketplace handoff in a public parking lot, afternoon</span></div>
+        <div class="uc-b"><h3>Marketplace meetups</h3><p>Buy and sell in person with more confidence on both sides of the exchange.</p></div>
+      </article>
+      <article class="card uc rv">
+        <div class="shot has-scene"><img class="scene" src="img/scenes/college-life.jpg" alt="students walking across a campus quad at dusk" loading="lazy"><span>Photo: students walking across a campus quad at dusk</span></div>
+        <div class="uc-b"><h3>College life</h3><p>Independence, with a trusted network that doesn't require checking in constantly.</p></div>
+      </article>
+      <article class="card uc rv">
+        <div class="shot has-scene"><img class="scene" src="img/scenes/travel.jpg" alt="solo traveler with a backpack in an unfamiliar train station" loading="lazy"><span>Photo: solo traveler with a backpack in an unfamiliar train station</span></div>
+        <div class="uc-b"><h3>Travel</h3><p>Explore unfamiliar places knowing someone at home knows the plan.</p></div>
+      </article>
+      <article class="card uc rv">
+        <div class="shot has-scene"><img class="scene" src="img/scenes/getting-there.jpg" alt="person getting into a rideshare at night, phone in hand" loading="lazy"><span>Photo: person getting into a rideshare at night, phone in hand</span></div>
+        <div class="uc-b"><h3>Getting there and back</h3><p>Rideshares, late shifts, long walks — the ordinary trips that deserve attention too.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<div class="band">
+  <div class="shell"><p>People already look out for each other. <em>We're building better tools to do it.</em></p></div>
+</div>
+
+<!-- HOW (short) -->
+<section class="sec">
+  <div class="shell split">
+    <div class="rv">
+      <span class="eyebrow">How it works</span>
+      <h2 style="font-size:clamp(28px,3.9vw,42px);margin-bottom:18px">Five steps, and then you forget about it.</h2>
+      <p class="lede" style="margin-bottom:30px">The point of a safety tool is that it works quietly in the background while you get on with the evening.</p>
+      <div class="route">
+        <div class="stop"><h3>Set up your Knite ID</h3><p>Verify once. Reuse it every time it matters.</p></div>
+          <div class="stop"><h3>Build your Knite network</h3><p>Connect the people you'd actually call.</p></div>
+        <div class="stop"><h3>Verify who you're meeting</h3><p>Exchange Knites before you go, without swapping numbers.</p></div>
+        <div class="stop"><h3>Set your plan</h3><p>Where you're going, who you're meeting, when you expect to be done.</p></div>
+        <div class="stop"><h3>Get home</h3><p>The people who care about you know you made it.</p></div>
+      </div>
+      <p style="margin-top:30px"><a class="btn btn-g" href="how-it-works.html">Read the full walkthrough</a></p>
+    </div>
+    <div class="rv">
+      <div class="phone">
+        <div class="ph-top"><span>9:41</span><span>▮▮▮</span></div>
+        <div class="ph-card hi">
+          <div class="ph-lab">Plan in progress</div>
+          <div class="ph-val">Coffee — Main Street</div>
+        </div>
+        <div class="ph-card">
+          <div class="ph-row"><span>Sharing with</span><span class="ok">3 contacts</span></div>
+          <div class="ph-row"><span>Check-in</span><span class="ok">On time</span></div>
+          <div class="ph-row"><span>Battery</span><span class="ok">Good</span></div>
+        </div>
+        <div class="ph-btn">I'm home safe</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPUS TEASER -->
+<section class="sec sec-alt">
+  <div class="shell split flip">
+    <div class="rv"><div class="shot wide has-scene"><img class="scene" src="img/scenes/campus-wide.jpg" alt="campus at dusk — students crossing between buildings, warm window light" loading="lazy"><span>Photo: campus at dusk — students crossing between buildings, warm window light</span></div></div>
+    <div class="rv">
+      <span class="eyebrow">Knite Lyfe Campus</span>
+      <h2 style="font-size:clamp(28px,3.9vw,42px);margin-bottom:18px">Campus safety doesn't end at the edge of campus.</h2>
+      <p class="lede" style="margin-bottom:26px">Blue-light phones and campus escorts stop where the sidewalk does. Most of student social life happens past that line. Knite Lyfe Campus is designed to complement what universities already have in place.</p>
+      <a class="btn btn-p" href="knite-campus.html" data-analytics="home_campus_cta">Explore Knite Lyfe Campus</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec">
+  <div class="shell">
+    <div class="cta rv">
+      <div class="glow glow-o" style="width:420px;height:420px;top:-190px;left:50%;transform:translateX(-50%)"></div>
+      <div style="position:relative;z-index:2">
+        <span class="eyebrow">Coming 2027</span>
+        <h2>Be first to know.</h2>
+        <p class="lede">Knite Lyfe is in development. Join the waitlist and we'll tell you when it's ready — nothing else.</p>
+        <div class="cta-row">
+          <a class="btn btn-p" href="contact.html#waitlist">Join the waitlist</a>
+          <a class="btn btn-g" href="about.html">Read our story</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l10 4.2v8.4C26 22.7 21.6 28 16 29.6 10.4 28 6 22.7 6 15.6V7.2L16 3z" fill="none" stroke="#F97316" stroke-width="2.2"/><path d="M16 10v10M11.5 14.5h9" stroke="#F97316" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <span><span class="kl">Knite</span> <span class="lf">Lyfe</span></span>
+        </a>
+        <img class="foot-mark" src="img/helmet.png" alt="" aria-hidden="true" loading="lazy">
+        <p class="tagline">To reclaim safety and peace of mind for people in social and public settings.</p>
+      </div>
+      <div><h4>Product</h4><ul>
+        <li><a href="knite-exchange.html">Knite ID &amp; Exchange</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="knite-campus.html">Knite Lyfe Campus</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="perspective.html">Perspective</a></li>
+        <li><a href="safety.html">Safety &amp; Trust</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="safety.html">Privacy Policy</a></li>
+        <li><a href="safety.html">Terms of Service</a></li>
+        <li><a href="safety.html">Safety Notice</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Knite Lyfe, Inc. All rights reserved.</span>
+      <span>8 The Green STE B, Dover, DE 19901 · adminknitelyfe@gmail.com · 302-497-8630</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

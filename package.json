@@ -1,0 +1,14 @@
+{
+  "name": "knitelyfe-site-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for the Knite Lyfe static site. Not part of the deployable site/ folder.",
+  "scripts": {
+    "serve": "node serve.js",
+    "prep": "node prep-scenes.js",
+    "place": "node place-scenes.js --write"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4"
+  }
+}

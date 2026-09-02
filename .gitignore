@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------------------
+# Dependencies — reinstallable from package.json, never committed
+# ---------------------------------------------------------------------------
+node_modules/
+Native/**/node_modules/
+
+# ---------------------------------------------------------------------------
+# Confidential business documents.
+# These are deliberately excluded so that this repository stays safe to push,
+# make public, or share with a collaborator without a separate review step.
+# If any of these ever need version control, they belong in a private repo of
+# their own — not alongside the website.
+# ---------------------------------------------------------------------------
+*.pdf
+*.docx
+*.xlsx
+*.pptx
+
+# ---------------------------------------------------------------------------
+# Working files, not part of the deployable site
+# ---------------------------------------------------------------------------
+screen shots/
+site.backup/
+*.bak
+*.html.bak
+
+# ---------------------------------------------------------------------------
+# Windows / editor cruft
+# ---------------------------------------------------------------------------
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# Redundant archive — the same source is unpacked alongside it
+# ---------------------------------------------------------------------------
+*.zip
+
+# ---------------------------------------------------------------------------
+# Machine-local tool settings (launch.json IS tracked; local overrides are not)
+# ---------------------------------------------------------------------------
+**/.claude/settings.local.json
