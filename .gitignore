@@ -48,20 +48,19 @@ Thumbs.db
 # Copy google-services.json.example to google-services.json to build.
 # ---------------------------------------------------------------------------
 google-services.json
-
 # ---------------------------------------------------------------------------
 # Kept out of this repository — it is public, and this repo is the website.
 #
-#   Native/           the React Native app source: core product IP
-#   raw/              full-resolution source photography (site/img/ ships the
-#                     compressed versions the website actually needs)
+#   Native/           React Native app source: core product IP
 #   _parked/          shelved product concepts and positioning work
 #   image-prompts.md  creative brief and art-direction review notes
 #
-# All four remain on disk locally. If any of them needs version control, it
-# belongs in a private repository of its own.
+# raw/ IS tracked: the source photography is the site's own artwork and is
+# worth versioning alongside it.
+#
+# All three remain on disk locally. If any needs version control, it belongs
+# in a private repository of its own.
 # ---------------------------------------------------------------------------
 Native/
-raw/
 _parked/
 image-prompts.md
