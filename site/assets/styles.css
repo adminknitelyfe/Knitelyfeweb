@@ -290,6 +290,12 @@ details[open] summary::after{content:"–"}
 
 
 /* ---------- brand marks ---------- */
+/* Hero watermark — currently unused. The full helmet mark is near-square, and
+   at this scale grayscale+brightness turned it into a pale blue-grey haze
+   behind the hero card rather than a mark. The corner glow and the message
+   thread already carry that side of the hero. To restore, add back:
+   <img class="mark-wm" src="img/helmet.png" alt="" aria-hidden="true"
+        style="width:min(52vw,620px);top:-6%;right:-10%"> */
 .mark-wm{
   position:absolute;pointer-events:none;z-index:0;opacity:.055;
   filter:grayscale(1) brightness(2.2)
