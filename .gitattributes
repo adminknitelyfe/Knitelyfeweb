@@ -1,0 +1,14 @@
+# Normalise line endings in the repository to LF, regardless of the checkout
+# platform. Without this, editing on Windows rewrites whole files as CRLF and
+# every diff looks like the entire file changed.
+* text=auto eol=lf
+
+# Binary assets — never touched, never diffed as text
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.webp    binary
+*.mp3     binary
+*.ico     binary
+*.keystore binary
+*.jar     binary
