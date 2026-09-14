@@ -29,6 +29,11 @@ const MAP = [
   { name: 'campus-wide',         ar: 16 / 9 },
   { name: 'doorstep-goodbye',    ar: 1 },
   { name: 'residence-hall',      ar: 3 / 4 },
+
+  // Knite Exchange use-case cards — same scenes as the homepage, cropped 16:10
+  { name: 'exchange-marketplace', ar: 16 / 10, from: 'marketplace' },
+  { name: 'exchange-dating',      ar: 16 / 10, from: 'meeting-someone-new' },
+  { name: 'exchange-social',      ar: 16 / 10, from: 'going-out' },
 ];
 
 const label = ar => ({ [4/3]: '4:3', [16/9]: '16:9', [1]: '1:1', [3/4]: '3:4', [16/10]: '16:10' })[ar] || ar.toFixed(3);
@@ -41,7 +46,7 @@ const kb = b => (b / 1024).toFixed(0) + ' KB';
 
   let found = 0, outTotal = 0;
   for (const m of MAP) {
-    const src = find(m.name);
+    const src = find(m.from || m.name);
     if (!src) { console.log(`  MISSING   ${m.name.padEnd(20)} [${label(m.ar)}]`); continue; }
     found++;
 

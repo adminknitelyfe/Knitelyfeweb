@@ -25,6 +25,9 @@ const MAP = [
   { name: 'campus-wide',         match: 'crossing between buildings' },
   { name: 'doorstep-goodbye',    match: 'doorstep at night' },
   { name: 'residence-hall',      match: 'residence hall at night' },
+  { name: 'exchange-marketplace', match: 'daylit public car park' },
+  { name: 'exchange-dating',      match: 'busy caf' },
+  { name: 'exchange-social',      match: 'out together on a lit city street' },
 ];
 
 const find = n => { for (const e of EXT) if (fs.existsSync(path.join(SCENES, n + e))) return n + e; return null; };
@@ -43,7 +46,14 @@ for (const line of list.split('\n')) {
 
 let present = 0, placed = 0, total = 0;
 for (const m of MAP) {
-  const hit = slots.find(s => s.desc.toLowerCase().includes(m.match.toLowerCase()));
+  const hits = slots.filter(s => s.desc.toLowerCase().includes(m.match.toLowerCase()));
+  if (hits.length > 1) {
+    console.log(`  AMBIGUOUS ${m.name.padEnd(22)} "${m.match}" matches ${hits.length} slots:`);
+    hits.forEach(h => console.log(`             ${h.page}.html slot ${h.slot} — ${h.desc}`));
+    console.log('             (refusing to guess; make the match string unique)');
+    continue;
+  }
+  const hit = hits[0];
   const file = find(m.name);
   if (!hit) { console.log(`  NO SLOT  ${m.name.padEnd(20)} (no caption matching "${m.match}")`); continue; }
   if (!file) { console.log(`  MISSING  ${m.name.padEnd(20)} -> ${hit.page}.html slot ${hit.slot}`); continue; }
