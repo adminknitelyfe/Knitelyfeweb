@@ -306,13 +306,25 @@ details[open] summary::after{content:"–"}
   background:linear-gradient(140deg,rgba(15,39,71,.72),rgba(10,22,40,.72));
   padding:clamp(26px,3.6vw,42px);position:relative;overflow:hidden
 }
-.knight-fig{position:relative;flex:none;width:clamp(120px,15vw,180px)}
-.knight-fig::after{
-  content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
-  width:78%;height:16px;border-radius:50%;background:rgba(0,0,0,.5);filter:blur(9px)
+/* The mascot sits on a light plate rather than straight on the navy card.
+   The illustration is semi-transparent through roughly a fifth of the figure
+   and was drawn against white, so on navy the background bleeds through the
+   suit and horns. Every attempt to flatten it either washed the colour out
+   (white is baked into those pixels) or smeared the horn interiors, which
+   have no recoverable colour left. Giving it the white it expects keeps the
+   art exactly as drawn — and matches how the helmet mark sits in its own
+   panel higher up the page. Keep this plate if the artwork stays as-is;
+   it can go once the mascot is supplied fully opaque or as vector. */
+.knight-fig{
+  position:relative;flex:none;width:clamp(150px,18vw,215px);
+  background:linear-gradient(160deg,#FFFFFF,#E7EDF4);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--r-lg);
+  padding:clamp(12px,1.6vw,20px) clamp(12px,1.6vw,20px) 0;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.62)
 }
-.knight-fig img{position:relative;z-index:1;width:100%;
-  filter:drop-shadow(0 16px 30px rgba(0,0,0,.55))}
+.knight-fig img{display:block;width:100%}
+body.day .knight-fig{border-color:#D6E0EB;box-shadow:0 14px 30px -18px rgba(16,38,64,.34)}
 .knight h3{font-size:clamp(21px,2.7vw,30px);margin-bottom:12px}
 .knight p{color:var(--silver);margin-bottom:0}
 body.day .knight{background:linear-gradient(140deg,#fff,#EEF4FA);border-color:#D6E0EB}
@@ -377,6 +389,10 @@ body.day .pod p{color:#4C6178}
 @media(max-width:560px){
   .g4,.f-row{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
+  /* Side by side, the mascot plate leaves too little room for the copy and the
+     heading breaks after every word or two. Stack instead. */
+  .knight{grid-template-columns:1fr;gap:22px}
+  .knight-fig{width:min(160px,44vw)}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
