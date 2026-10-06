@@ -310,30 +310,18 @@ details[open] summary::after{content:"–"}
   background:linear-gradient(140deg,rgba(15,39,71,.72),rgba(10,22,40,.72));
   padding:clamp(26px,3.6vw,42px);position:relative;overflow:hidden
 }
-/* The mascot sits on a light plate rather than straight on the navy card.
-   The illustration is semi-transparent through roughly a fifth of the figure
-   and was drawn against white, so on navy the background bleeds through the
-   suit and horns. Every attempt to flatten it either washed the colour out
-   (white is baked into those pixels) or smeared the horn interiors, which
-   have no recoverable colour left. Giving it the white it expects keeps the
-   art exactly as drawn — and matches how the helmet mark sits in its own
-   panel higher up the page. Keep this plate if the artwork stays as-is;
-   it can go once the mascot is supplied fully opaque or as vector. */
-/* Width is capped by the artwork, not by taste: mascot.png is only 302px
-   wide, so on a 2x display the image itself must stay under ~151px or it
-   upscales and goes soft. Minus the plate's padding, 185px is the ceiling.
-   Raise this only when the mascot is re-exported larger — ~1200px tall
-   would allow roughly double. */
-.knight-fig{
-  position:relative;flex:none;width:clamp(130px,15vw,185px);
-  background:linear-gradient(160deg,#FFFFFF,#E7EDF4);
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:var(--r-lg);
-  padding:clamp(12px,1.6vw,20px) clamp(12px,1.6vw,20px) 0;
-  box-shadow:0 18px 40px -18px rgba(0,0,0,.62)
+/* The mascot sits directly on the navy card. It briefly needed a light plate
+   behind it, because the old 302px artwork was semi-transparent through about
+   a fifth of the figure and the background showed through his suit. The
+   re-exported art is a clean 760px cutout with no interior transparency, so
+   the plate is gone and the size cap with it. */
+.knight-fig{position:relative;flex:none;width:clamp(150px,19vw,250px)}
+.knight-fig::after{
+  content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+  width:72%;height:16px;border-radius:50%;background:rgba(0,0,0,.45);filter:blur(10px)
 }
-.knight-fig img{display:block;width:100%}
-body.day .knight-fig{border-color:#D6E0EB;box-shadow:0 14px 30px -18px rgba(16,38,64,.34)}
+.knight-fig img{position:relative;z-index:1;display:block;width:100%;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,.45))}
 .knight h3{font-size:clamp(21px,2.7vw,30px);margin-bottom:12px}
 .knight p{color:var(--silver);margin-bottom:0}
 body.day .knight{background:linear-gradient(140deg,#fff,#EEF4FA);border-color:#D6E0EB}
@@ -401,7 +389,7 @@ body.day .pod p{color:#4C6178}
   /* Side by side, the mascot plate leaves too little room for the copy and the
      heading breaks after every word or two. Stack instead. */
   .knight{grid-template-columns:1fr;gap:22px}
-  .knight-fig{width:min(160px,44vw)}
+  .knight-fig{width:min(190px,52vw)}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
