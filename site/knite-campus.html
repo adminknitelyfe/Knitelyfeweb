@@ -268,7 +268,8 @@
   <div class="shell">
     <div class="sec-head rv"><span class="eyebrow">Bring Knite Lyfe to your campus</span><h2>Start the conversation.</h2>
       <p class="lede">We're speaking with universities, student affairs teams, residence life and student organizations while we build. Early conversations shape the program.</p></div>
-    <form class="form rv" data-demo>
+    <form class="form rv" data-endpoint="/api/campus"
+          data-success="Thanks — that's with us. We'll reply within a few business days.">
       <div class="f-row">
         <div><label for="u-name">Name <span class="req">*</span></label><input id="u-name" name="name" required></div>
         <div><label for="u-title">Title / role</label><input id="u-title" name="title"></div>
@@ -285,6 +286,8 @@
           <option>Study abroad or program office</option><option>Student</option><option>Other</option>
         </select></div>
       <div><label for="u-msg">What would you like to discuss? <span class="req">*</span></label><textarea id="u-msg" name="message" required></textarea></div>
+      <!-- Honeypot — see contact.html -->
+      <div class="hp" aria-hidden="true"><label for="u-co">Company</label><input id="u-co" name="company" tabindex="-1" autocomplete="off"></div>
       <div><button class="btn btn-p" type="submit">Bring Knite Lyfe to my campus</button></div>
       <p class="form-note dim" style="font-size:13.5px;margin:0">We'll reply within a few business days.</p>
     </form>

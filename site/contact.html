@@ -63,7 +63,8 @@
         <span class="eyebrow">Join the waitlist</span>
         <h2 style="font-size:clamp(25px,3.3vw,36px);margin-bottom:16px">Be first to know when it's ready.</h2>
         <p class="lede" style="margin-bottom:26px">One email when there's something to use. No newsletter, no marketing sequence.</p>
-        <form class="form" data-demo>
+        <form class="form" data-endpoint="/api/waitlist"
+              data-success="You're on the list. We'll email you when there's something to use.">
           <div><label for="w-name">Name <span class="req">*</span></label><input id="w-name" name="name" required></div>
           <div><label for="w-email">Email <span class="req">*</span></label><input id="w-email" name="email" type="email" required></div>
           <div><label for="w-topic">I'm reaching out about</label>
@@ -72,6 +73,10 @@
               <option>Knite Lyfe Campus / university</option><option>Partnership</option><option>Media</option>
             </select></div>
           <div><label for="w-msg">Message</label><textarea id="w-msg" name="message"></textarea></div>
+          <!-- Honeypot: hidden from people, catnip for bots. Anything here means
+               the submission is discarded. Not a CAPTCHA — nobody filling in a
+               waitlist form should have to prove they are human. -->
+          <div class="hp" aria-hidden="true"><label for="w-co">Company</label><input id="w-co" name="company" tabindex="-1" autocomplete="off"></div>
           <div><button class="btn btn-p" type="submit">Send</button></div>
           <p class="form-note dim" style="font-size:13.5px;margin:0">We'll only use your email to reply and to tell you when Knite Lyfe launches.</p>
         </form>

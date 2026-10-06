@@ -261,6 +261,10 @@ input,select,textarea{
 input:focus,select:focus,textarea:focus{border-color:var(--orange);outline:none}
 textarea{min-height:132px;resize:vertical}
 .req{color:var(--orange)}
+/* Honeypot. Hidden from sight, from the tab order and from screen readers, but
+   still a real field a bot will fill in. Not `display:none` — some bots skip
+   those, and this needs to look fillable to them. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* ---------- accordion ---------- */
 details{border:1px solid var(--navy-3);border-radius:var(--r);margin-bottom:11px;

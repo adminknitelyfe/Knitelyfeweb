@@ -1,21 +1,26 @@
 {
-  // Knite Lyfe website — deployed to Cloudflare Workers as static assets.
+  // Knite Lyfe website — deployed to Cloudflare Workers.
   //
-  // There is deliberately no Worker script here. The site is nine static HTML
-  // pages with no server-side logic, so Workers Static Assets serves ./site
-  // directly from Cloudflare's edge. Adding a `main` entry point would only be
-  // needed if the site later requires server-side behaviour (form handling,
-  // redirects with logic, an API route).
+  // The site is nine static HTML pages, served from ./site by Workers Static
+  // Assets. The Worker in ./worker exists only to answer the form endpoints
+  // (/api/waitlist, /api/campus, /api/signups); every other request falls
+  // through to the static assets via the ASSETS binding, so there is still one
+  // deploy and one domain.
   //
   // Deploy:  npx wrangler deploy
   // Preview: npx wrangler versions upload
+  // Local:   npx wrangler dev        (uses a local SQLite file, not production)
 
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "knitelyfeweb",
+  "main": "worker/index.js",
   "compatibility_date": "2026-08-27",
 
   "assets": {
     "directory": "./site",
+
+    // Named so the Worker can hand non-API requests straight to the assets.
+    "binding": "ASSETS",
 
     // "auto-trailing-slash" lets /safety resolve to /safety.html, so the clean
     // URL and the .html URL both work. Every internal link on the site uses the
@@ -28,6 +33,22 @@
     // exists.
     "not_found_handling": "none"
   },
+
+  // Form submissions. Create with:
+  //   npx wrangler d1 create knitelyfe-signups
+  // then paste the database_id it prints in below.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "knitelyfe-signups",
+      "database_id": "PASTE_DATABASE_ID_HERE",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Secrets are NOT set here — this file is in a public repo. Set them with:
+  //   npx wrangler secret put ADMIN_TOKEN     (guards the export endpoint)
+  //   npx wrangler secret put IP_SALT         (salts the stored IP hashes)
 
   "observability": {
     "enabled": true

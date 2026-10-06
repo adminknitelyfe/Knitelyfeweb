@@ -90,17 +90,71 @@
     if (el) { window.knite.track(el.getAttribute('data-analytics')); }
   });
 
-  /* forms are not wired to a backend yet — be honest about it */
-  document.querySelectorAll('form[data-demo]').forEach(function (f) {
+  /* Form submission. Posts to the Worker in /worker; falls back to telling
+     people to email if anything goes wrong, because a form that silently
+     eats a signup is worse than one that admits it is broken. */
+  var EMAIL_FALLBACK =
+    'Something went wrong on our end. Email adminknitelyfe@gmail.com and we will reply directly.';
+
+  document.querySelectorAll('form[data-endpoint]').forEach(function (f) {
+    var note = f.querySelector('.form-note');
+    var btn = f.querySelector('button[type="submit"]');
+    var original = note ? note.textContent : '';
+
+    function say(msg, tone) {
+      if (!note) return;
+      note.textContent = msg;
+      note.style.color = tone === 'bad' ? '#FDBA74' : tone === 'good' ? '#4ADE80' : '';
+    }
+
     f.addEventListener('submit', function (e) {
       e.preventDefault();
-      var note = f.querySelector('.form-note');
-      if (note) {
-        note.textContent =
-          'This form is not connected yet. Email adminknitelyfe@gmail.com and we will reply directly.';
-        window.knite && window.knite.track('form_submit_blocked', f.getAttribute('data-intent') || 'general');
-        note.style.color = '#FDBA74';
-      }
+      if (f.dataset.busy) return;
+
+      if (!f.checkValidity()) { f.reportValidity(); return; }
+
+      f.dataset.busy = '1';
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
+      say('Sending…');
+
+      var body = {};
+      new FormData(f).forEach(function (v, k) { body[k] = v; });
+      body.page = location.pathname.replace(/^\//, '').replace(/\.html$/, '') || 'index';
+
+      fetch(f.getAttribute('data-endpoint'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { r: r, d: d }; }); })
+        .then(function (res) {
+          if (res.r.ok && res.d.ok) {
+            f.reset();
+            say(f.getAttribute('data-success') || "You're on the list. We'll be in touch.", 'good');
+            window.knite && window.knite.track('form_submit_ok', f.getAttribute('data-endpoint'));
+            return;
+          }
+          var err = res.d.error;
+          say(
+            err === 'invalid_email' ? 'That email address does not look right. Mind checking it?'
+            : err === 'missing_field' ? 'Please fill in the required fields.'
+            : err === 'rate_limited' ? 'That is a lot of submissions from one place. Try again in a little while.'
+            : EMAIL_FALLBACK,
+            'bad'
+          );
+          window.knite && window.knite.track('form_submit_error', err || res.r.status);
+        })
+        .catch(function () {
+          say(EMAIL_FALLBACK, 'bad');
+          window.knite && window.knite.track('form_submit_network_error');
+        })
+        .then(function () {
+          delete f.dataset.busy;
+          if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Send'; }
+          setTimeout(function () {
+            if (note && note.style.color === 'rgb(74, 222, 128)') { say(original); }
+          }, 8000);
+        });
     });
   });
 })();
