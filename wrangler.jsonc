@@ -16,6 +16,24 @@
   "main": "worker/index.js",
   "compatibility_date": "2026-08-27",
 
+  // Custom domains. Declaring them here means Cloudflare manages the DNS
+  // records for them — adding knitelyfe.com replaced the A record that used to
+  // point at the WordPress install on Northwest Registered Agent
+  // (66.223.49.89). See ROLLBACK-dns.md to undo that.
+  //
+  // www is included because it was its own A record pointing at Northwest, not
+  // a redirect rule — leaving it alone would have left www serving the old
+  // host after the apex moved.
+  //
+  // The *.knitelyfe.com wildcard still points at Northwest and is deliberately
+  // left in place: more specific records win, so it does not affect these, and
+  // it is what makes old.knitelyfe.com work if WordPress is ever restored.
+  "routes": [
+    { "pattern": "knitelyfe.com", "custom_domain": true },
+    { "pattern": "www.knitelyfe.com", "custom_domain": true },
+    { "pattern": "v1.knitelyfe.com", "custom_domain": true }
+  ],
+
   "assets": {
     "directory": "./site",
 
@@ -34,14 +52,14 @@
     "not_found_handling": "none"
   },
 
-  // Form submissions. Create with:
-  //   npx wrangler d1 create knitelyfe-signups
-  // then paste the database_id it prints in below.
+  // Form submissions. The database_id is an identifier, not a credential —
+  // it is safe in a public repo. Access is controlled by the account the
+  // Worker is deployed under, not by knowing this string.
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "knitelyfe-signups",
-      "database_id": "PASTE_DATABASE_ID_HERE",
+      "database_id": "e64d8b94-c257-4589-b90a-f244e7e30711",
       "migrations_dir": "migrations"
     }
   ],
