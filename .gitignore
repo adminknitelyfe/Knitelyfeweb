@@ -68,3 +68,6 @@ image-prompts.md
 # Local Worker secrets for `wrangler dev` — never committed.
 .dev.vars
 .wrangler/
+
+# Fonts fetched for building the social image. Not shipped.
+.fonts/
