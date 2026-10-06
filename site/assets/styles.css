@@ -319,8 +319,13 @@ details[open] summary::after{content:"–"}
    art exactly as drawn — and matches how the helmet mark sits in its own
    panel higher up the page. Keep this plate if the artwork stays as-is;
    it can go once the mascot is supplied fully opaque or as vector. */
+/* Width is capped by the artwork, not by taste: mascot.png is only 302px
+   wide, so on a 2x display the image itself must stay under ~151px or it
+   upscales and goes soft. Minus the plate's padding, 185px is the ceiling.
+   Raise this only when the mascot is re-exported larger — ~1200px tall
+   would allow roughly double. */
 .knight-fig{
-  position:relative;flex:none;width:clamp(150px,18vw,215px);
+  position:relative;flex:none;width:clamp(130px,15vw,185px);
   background:linear-gradient(160deg,#FFFFFF,#E7EDF4);
   border:1px solid rgba(255,255,255,.16);
   border-radius:var(--r-lg);
